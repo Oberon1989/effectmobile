@@ -112,7 +112,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 10, 2026</li>
+        <li>Last updated: February 11, 2026</li>
     </ul>
 </div>
 
@@ -338,12 +338,27 @@ fetch(url, {
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">content-type: text/html; charset=utf-8
-cache-control: no-cache, private
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;"></code>
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;Доработка&quot;,
+        &quot;description&quot;: &quot;Доработать модуль корзина в проекте для обработки заказов&quot;,
+        &quot;created_at&quot;: &quot;2026-02-11T00:12:26.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2026-02-11T01:16:44.000000Z&quot;,
+        &quot;status&quot;: {
+            &quot;id&quot;: 4,
+            &quot;name&quot;: &quot;Completed&quot;,
+            &quot;description&quot;: &quot;Завершено Успешно&quot;,
+            &quot;created_at&quot;: &quot;2026-02-11T01:13:36.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2026-02-11T01:13:59.000000Z&quot;
+        }
+    }
+]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-tasks" hidden>
@@ -432,14 +447,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/tasks/consequatur" \
+    --get "http://localhost/api/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/tasks/consequatur"
+    "http://localhost/api/tasks/1"
 );
 
 const headers = {
@@ -456,7 +471,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-tasks--id-">
             <blockquote>
-            <p>Example response (404):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -468,7 +483,18 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: &quot;Task not found&quot;
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Доработка&quot;,
+    &quot;description&quot;: &quot;Доработать модуль корзина в проекте для обработки заказов&quot;,
+    &quot;created_at&quot;: &quot;2026-02-11T00:12:26.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2026-02-11T01:16:44.000000Z&quot;,
+    &quot;status&quot;: {
+        &quot;id&quot;: 4,
+        &quot;name&quot;: &quot;Completed&quot;,
+        &quot;description&quot;: &quot;Завершено Успешно&quot;,
+        &quot;created_at&quot;: &quot;2026-02-11T01:13:36.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2026-02-11T01:13:59.000000Z&quot;
+    }
 }</code>
  </pre>
     </span>
@@ -546,15 +572,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
+<small>integer</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="text" style="display: none"
-                              name="id"                data-endpoint="GETapi-tasks--id-"
-               value="consequatur"
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-tasks--id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the task. Example: <code>consequatur</code></p>
+<p>The ID of the task. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1048,32 +1074,11 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">[
     {
-        &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Created&quot;,
-        &quot;description&quot;: &quot;Задача создана&quot;,
-        &quot;created_at&quot;: &quot;2026-02-10T17:43:58.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2026-02-10T21:56:12.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 2,
-        &quot;name&quot;: &quot;InProgress&quot;,
-        &quot;description&quot;: &quot;Задача в работе&quot;,
-        &quot;created_at&quot;: &quot;2026-02-10T17:43:58.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2026-02-10T17:43:58.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 3,
+        &quot;id&quot;: 4,
         &quot;name&quot;: &quot;Completed&quot;,
-        &quot;description&quot;: &quot;Задача выполнена&quot;,
-        &quot;created_at&quot;: &quot;2026-02-10T17:43:58.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2026-02-10T17:43:58.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 5,
-        &quot;name&quot;: &quot;Aborted&quot;,
-        &quot;description&quot;: &quot;Задача отменена&quot;,
-        &quot;created_at&quot;: &quot;2026-02-10T21:55:26.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2026-02-10T21:55:26.000000Z&quot;
+        &quot;description&quot;: &quot;Завершено Успешно&quot;,
+        &quot;created_at&quot;: &quot;2026-02-11T01:13:36.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2026-02-11T01:13:59.000000Z&quot;
     }
 ]</code>
  </pre>
@@ -1164,14 +1169,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/statuses/1" \
+    --get "http://localhost/api/statuses/4" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/statuses/1"
+    "http://localhost/api/statuses/4"
 );
 
 const headers = {
@@ -1200,11 +1205,11 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;Created&quot;,
-    &quot;description&quot;: &quot;Задача создана&quot;,
-    &quot;created_at&quot;: &quot;2026-02-10T17:43:58.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2026-02-10T21:56:12.000000Z&quot;
+    &quot;id&quot;: 4,
+    &quot;name&quot;: &quot;Completed&quot;,
+    &quot;description&quot;: &quot;Завершено Успешно&quot;,
+    &quot;created_at&quot;: &quot;2026-02-11T01:13:36.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2026-02-11T01:13:59.000000Z&quot;
 }</code>
  </pre>
     </span>
@@ -1287,10 +1292,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-statuses--id-"
-               value="1"
+               value="4"
                data-component="url">
     <br>
-<p>The ID of the status. Example: <code>1</code></p>
+<p>The ID of the status. Example: <code>4</code></p>
             </div>
                     </form>
 
@@ -1307,7 +1312,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/statuses/1" \
+    "http://localhost/api/statuses/4" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1318,7 +1323,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/statuses/1"
+    "http://localhost/api/statuses/4"
 );
 
 const headers = {
@@ -1419,10 +1424,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-statuses--id-"
-               value="1"
+               value="4"
                data-component="url">
     <br>
-<p>The ID of the status. Example: <code>1</code></p>
+<p>The ID of the status. Example: <code>4</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1464,14 +1469,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/statuses/1" \
+    "http://localhost/api/statuses/4" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/statuses/1"
+    "http://localhost/api/statuses/4"
 );
 
 const headers = {
@@ -1567,10 +1572,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-statuses--id-"
-               value="1"
+               value="4"
                data-component="url">
     <br>
-<p>The ID of the status. Example: <code>1</code></p>
+<p>The ID of the status. Example: <code>4</code></p>
             </div>
                     </form>
 

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\CrudController;
 use App\Models\Status;
 use App\Services\StatusService;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,10 +17,10 @@ class StatusController extends CrudController
         $this->service = $service;
     }
 
-    public function create(Request $request) : JsonResponse
+    public function create(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'name'       => 'required|string|max:30',
+            'name' => 'required|string|max:30',
             'description' => 'nullable|string|max:255',
         ]);
 
@@ -32,12 +30,12 @@ class StatusController extends CrudController
         return response()->json($task, 201);
     }
 
-    public function getAll() : JsonResponse
+    public function getAll(): JsonResponse
     {
         return response()->json($this->service->getAllStatus());
     }
 
-    public function getById($id)
+    public function getById($id): JsonResponse
     {
         $status = $this->service->getStatusById($id);
 
@@ -54,11 +52,11 @@ class StatusController extends CrudController
         $status = Status::findOrFail($id);
 
         $validated = $request->validate([
-            'name'        => 'sometimes|string|max:30|unique:statuses,name,' . $status->id,
+            'name' => 'sometimes|string|max:30|unique:statuses,name,' . $status->id,
             'description' => 'sometimes|string|max:255',
         ]);
 
-        $updatedStatus = $this->service->updateStatus($status, ...$validated);
+        $updatedStatus = $this->service->updateStatus($status, $validated);
 
         return response()->json($updatedStatus);
     }
@@ -71,8 +69,7 @@ class StatusController extends CrudController
             return response()->json(['error' => 'Status not found'], 404);
         }
 
-        if ($status->tasks()->exists())
-        {
+        if ($status->tasks()->exists()) {
             return response()->json(['error' => 'Cannot delete status with tasks'], 422);
         }
 

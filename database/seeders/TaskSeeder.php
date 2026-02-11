@@ -9,7 +9,7 @@ class TaskSeeder extends Seeder
 {
     public function run(): void
     {
-        $tasks= [
+        $tasks = [
             [
                 'title' => 'Доработка модуля корзины',
                 'description' => 'Доработать модуль корзина в проекте для обработки заказов',
@@ -29,9 +29,11 @@ class TaskSeeder extends Seeder
 
         foreach ($tasks as $task) {
             Task::updateOrCreate(
-                ['title' => $tasks['title']],
-                ['description' => $tasks['description']],
-                ['status_id' => $tasks['status_id']]
+                ['title' => $task['title']],
+                [
+                    'description' => $task['description'],
+                    'status_id' => $task['status_id'],
+                ]
             );
         }
     }

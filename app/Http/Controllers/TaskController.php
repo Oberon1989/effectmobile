@@ -19,9 +19,9 @@ class TaskController extends CrudController
     public function create(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'title'       => 'required|string|max:30',
+            'title' => 'required|string|max:30',
             'description' => 'nullable|string|max:255',
-            'status_id'   => 'required|integer|exists:statuses,id',
+            'status_id' => 'required|integer|exists:statuses,id',
         ]);
 
 
@@ -29,11 +29,13 @@ class TaskController extends CrudController
 
         return response()->json($task, 201);
     }
-    public function getAll()
+
+    public function getAll(): JsonResponse
     {
-        // TODO: Implement getAll() method.
+        return response()->json($this->service->getAllTasks());
     }
-    public function getById($id) : JsonResponse
+
+    public function getById($id): JsonResponse
     {
         $task = $this->service->getTaskById($id);
 
@@ -45,21 +47,21 @@ class TaskController extends CrudController
     }
 
 
-    public function update(Request $request, $id) : JsonResponse
+    public function update(Request $request, $id): JsonResponse
     {
         $task = Task::findOrFail($id);
         $validated = $request->validate([
-            'title'        => 'sometimes|string|max:30|unique:tasks,title,' . $task->id,
+            'title' => 'sometimes|string|max:30|unique:tasks,title,' . $task->id,
             'description' => 'sometimes|string|max:255',
-            'status_id'    => 'sometimes|integer|exists:statuses,id',
+            'status_id' => 'sometimes|integer|exists:statuses,id',
         ]);
 
-        $updatedTask = $this->service->updateTask($task, ...$validated);
+        $updatedTask = $this->service->updateTask($task, $validated);
 
         return response()->json($updatedTask);
     }
 
-    public function deleteById($id)
+    public function deleteById($id): JsonResponse
     {
         $task = $this->service->getTaskById($id);
 
